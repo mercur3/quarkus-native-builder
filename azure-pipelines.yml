@@ -1,55 +1,100 @@
+
 trigger:
   - master
 jobs:
-  - job:
-    displayName: Building on Fedora 36, Java 11
+  - job: Building on Fedora 36, Java 11
     pool:
-      vmImage: ubuntu-latest
+    vmImage: ubuntu-latest
     steps:
       - script: |
           echo "Building the images"
           printf "Using %d threads\n" $(nproc)
           echo "------------------------------------------------------\n"
 
-          sed "s/__fedora_version__/$FEDORA_VERSION/g" -i Dockerfile
-          sed "s/__mandrel_version__/$MANDREL_VERSION/g" -i Dockerfile
-          sed "s/__java_version__/$JAVA_VERSION/g" -i Dockerfile
+          sed "s/__fedora_version__/36/g" -i Dockerfile
+          sed "s/__mandrel_version__/22.2.0.0-Final/g" -i Dockerfile
+          sed "s/__java_version__/11/g" -i Dockerfile
           cat Dockerfile
 
-          docker build -f Dockerfile -t quarkus-native-builder:f$FEDORA_VERSION-j$JAVA_VERSION .
+          docker build -f Dockerfile -t quarkus-native-builder:f36-j11 .
           
           echo "------------------------------------------------------\n"
 
           # echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
           # docker push $MEDIUM_36
           # docker push $FULL_36
-        env:
-          # DOCKER_PASSWORD: $(DOCKER_PASSWORD)
-          FEDORA_VERSION: 36
-          JAVA_VERSION: 11
-          MANDREL_VERSION: 22.2.0.0-Final
-  # - job:
-  #   displayName: Build Fedora 37
-  #   pool:
-  #     vmImage: ubuntu-latest
-  #   steps:
-  #     - script: |
-  #         echo "Building the images"
-  #         printf "Using %d threads\n" $(nproc)
-  #         echo "------------------------------------------------------\n"
+          # env:
+          #   DOCKER_PASSWORD: $(DOCKER_PASSWORD)
 
-  #         docker build -f Dockerfile.37-base -t $BASE_37 .
-  #         docker build -f Dockerfile.37-medium -t $MEDIUM_37 .
-  #         docker build -f Dockerfile.37-full -t $FULL_37 .
+  - job: Building on Fedora 36, Java 17
+    pool:
+    vmImage: ubuntu-latest
+    steps:
+      - script: |
+          echo "Building the images"
+          printf "Using %d threads\n" $(nproc)
+          echo "------------------------------------------------------\n"
+
+          sed "s/__fedora_version__/36/g" -i Dockerfile
+          sed "s/__mandrel_version__/22.2.0.0-Final/g" -i Dockerfile
+          sed "s/__java_version__/17/g" -i Dockerfile
+          cat Dockerfile
+
+          docker build -f Dockerfile -t quarkus-native-builder:f36-j17 .
           
-  #         echo "------------------------------------------------------\n"
+          echo "------------------------------------------------------\n"
 
-  #         echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
-  #         docker push $MEDIUM_37
-  #         docker push $FULL_37
-  #       env:
-  #         DOCKER_PASSWORD: $(DOCKER_PASSWORD)
-  #         BASE_37: mercur3/fedora-latex-emacs:37-base
-  #         MEDIUM_37: mercur3/fedora-latex-emacs:37-medium
-  #         FULL_37: mercur3/fedora-latex-emacs:37-full
+          # echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
+          # docker push $MEDIUM_36
+          # docker push $FULL_36
+          # env:
+          #   DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+
+  - job: Building on Fedora 37, Java 11
+    pool:
+    vmImage: ubuntu-latest
+    steps:
+      - script: |
+          echo "Building the images"
+          printf "Using %d threads\n" $(nproc)
+          echo "------------------------------------------------------\n"
+
+          sed "s/__fedora_version__/37/g" -i Dockerfile
+          sed "s/__mandrel_version__/22.2.0.0-Final/g" -i Dockerfile
+          sed "s/__java_version__/11/g" -i Dockerfile
+          cat Dockerfile
+
+          docker build -f Dockerfile -t quarkus-native-builder:f37-j11 .
+          
+          echo "------------------------------------------------------\n"
+
+          # echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
+          # docker push $MEDIUM_36
+          # docker push $FULL_36
+          # env:
+          #   DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+
+  - job: Building on Fedora 37, Java 17
+    pool:
+    vmImage: ubuntu-latest
+    steps:
+      - script: |
+          echo "Building the images"
+          printf "Using %d threads\n" $(nproc)
+          echo "------------------------------------------------------\n"
+
+          sed "s/__fedora_version__/37/g" -i Dockerfile
+          sed "s/__mandrel_version__/22.2.0.0-Final/g" -i Dockerfile
+          sed "s/__java_version__/17/g" -i Dockerfile
+          cat Dockerfile
+
+          docker build -f Dockerfile -t quarkus-native-builder:f37-j17 .
+          
+          echo "------------------------------------------------------\n"
+
+          # echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
+          # docker push $MEDIUM_36
+          # docker push $FULL_36
+          # env:
+          #   DOCKER_PASSWORD: $(DOCKER_PASSWORD)
 
