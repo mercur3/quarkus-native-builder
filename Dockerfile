@@ -9,14 +9,14 @@ COPY dnf.conf /etc/dnf/
 
 # Installing the dependencies
 
-RUN dnf update; \\
-    dnf install gcc glibc-devel zlib-devel libstdc++-static freetype-devel; \\
-    mkdir /opt; \\
-    cd /opt; \\
-    wget -O graalvm-quarkus.tar.gz https://github.com/graalvm/mandrel/releases/download/mandrel-__mandrel_version__/mandrel-java__java_version__-linux-amd64-__mandrel_version__.tar.gz; \\
-    tar -xvf graalvm-quarkus.tar.gz; \\
-    rm graalvm-quarkus.tar.gz; \\
-    export JAVA_HOME="$(pwd)/graalvm-quarkus"; \\
-    export GRAALVM_HOME="${JAVA_HOME}"; \\
+RUN dnf update; \
+    dnf install gcc glibc-devel zlib-devel libstdc++-static freetype-devel; \
+    mkdir /opt; \
+    cd /opt; \
+    wget -O graalvm-quarkus.tar.gz https://github.com/graalvm/mandrel/releases/download/mandrel-__mandrel_version__/mandrel-java__java_version__-linux-amd64-__mandrel_version__.tar.gz; \
+    tar -xvf graalvm-quarkus.tar.gz; \
+    rm graalvm-quarkus.tar.gz; \
+    export JAVA_HOME="$(pwd)/graalvm-quarkus"; \
+    export GRAALVM_HOME="${JAVA_HOME}"; \
     export PATH="${GRAALVM_HOME}/bin:$PATH";
 
