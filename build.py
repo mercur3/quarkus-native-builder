@@ -15,7 +15,7 @@ jobs:"""
             output += f"""
   - job: Building on Fedora {f}, Java {j}
     pool:
-    vmImage: ubuntu-latest
+      vmImage: ubuntu-latest
     steps:
       - script: |
           echo "Building the images"
