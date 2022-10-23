@@ -14,6 +14,7 @@ jobs:
           sed "s/__fedora_version__/$FEDORA_VERSION/g" -i Dockerfile
           sed "s/__mandrel_version__/$MANDREL_VERSION/g" -i Dockerfile
           sed "s/__java_version__/$JAVA_VERSION/g" -i Dockerfile
+          cat Dockerfile
 
           docker build -f Dockerfile -t quarkus-native-builder:f$FEDORA_VERSION-j$JAVA_VERSION .
           
