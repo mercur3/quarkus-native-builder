@@ -2,7 +2,8 @@
 trigger:
   - master
 jobs:
-  - job: Building on Fedora 36, Java 11
+  - job:
+    displayName: Building on Fedora 36, Java 11
     pool:
       vmImage: ubuntu-latest
     steps:
@@ -26,7 +27,8 @@ jobs:
           # env:
           #   DOCKER_PASSWORD: $(DOCKER_PASSWORD)
 
-  - job: Building on Fedora 36, Java 17
+  - job:
+    displayName: Building on Fedora 36, Java 17
     pool:
       vmImage: ubuntu-latest
     steps:
@@ -50,7 +52,8 @@ jobs:
           # env:
           #   DOCKER_PASSWORD: $(DOCKER_PASSWORD)
 
-  - job: Building on Fedora 37, Java 11
+  - job:
+    displayName: Building on Fedora 37, Java 11
     pool:
       vmImage: ubuntu-latest
     steps:
@@ -74,7 +77,8 @@ jobs:
           # env:
           #   DOCKER_PASSWORD: $(DOCKER_PASSWORD)
 
-  - job: Building on Fedora 37, Java 17
+  - job:
+    displayName: Building on Fedora 37, Java 17
     pool:
       vmImage: ubuntu-latest
     steps:

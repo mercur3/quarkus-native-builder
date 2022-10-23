@@ -13,7 +13,8 @@ jobs:"""
     for f in SUPPORTED_FEDORA_VERSIONS:
         for j in SUPPORTED_JAVA_VERSIONS:
             output += f"""
-  - job: Building on Fedora {f}, Java {j}
+  - job:
+    displayName: Building on Fedora {f}, Java {j}
     pool:
       vmImage: ubuntu-latest
     steps:
