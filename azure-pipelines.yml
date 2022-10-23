@@ -2,7 +2,7 @@ trigger:
   - master
 jobs:
   - job:
-    displayName: Building: Fedora 36, Java 11
+    displayName: Building on Fedora 36, Java 11
     pool:
       vmImage: ubuntu-latest
     steps:
@@ -15,13 +15,13 @@ jobs:
           sed "s/__mandrel_version__/$MANDREL_VERSION/g" -i Dockerfile
           sed "s/__java_version__/$JAVA_VERSION/g" -i Dockerfile
 
-          docker build -f Dockerfile -t $BASE_36 .
+          docker build -f Dockerfile -t quarkus-native-builder:f$FEDORA_VERSION-j$JAVA_VERSION .
           
           echo "------------------------------------------------------\n"
 
-          echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
-          docker push $MEDIUM_36
-          docker push $FULL_36
+          # echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
+          # docker push $MEDIUM_36
+          # docker push $FULL_36
         env:
           # DOCKER_PASSWORD: $(DOCKER_PASSWORD)
           FEDORA_VERSION: 36
