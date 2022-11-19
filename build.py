@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
-SUPPORTED_FEDORA_VERSIONS = [36, 37]
-SUPPORTED_JAVA_VERSIONS = [11, 17]
-MANDREL_VERSION = "22.2.0.0-Final"
+SUPPORTED_FEDORA_VERSIONS: list[int] = [36, 37]
+SUPPORTED_JAVA_VERSIONS: list[int] = [11, 17]
+MANDREL_VERSION: str = "22.3.0.1-Final"
 
 
-def main():
+def main() -> None:
     output = """
 trigger:
   - master
@@ -46,3 +46,4 @@ jobs:"""
 
 if __name__ == "__main__":
     main()
+
