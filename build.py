@@ -17,6 +17,7 @@ trigger:
 jobs:"""
     for f in SUPPORTED_FEDORA_VERSIONS:
         for j in SUPPORTED_JAVA_VERSIONS:
+            tag_name = f"quarkus-native-builder:f{f}-j{j}"
             output += f"""
   - job:
     displayName: Building on Fedora {f}, Java {j}
@@ -27,7 +28,6 @@ jobs:"""
           echo "Building the images"
           printf "Using %d threads\\n" $(nproc)
           echo "------------------------------------------------------\\n"
-
           sed "s/__fedora_version__/{f}/g" -i Dockerfile
           sed "s/__mandrel_version__/{MANDREL_VERSION}/g" -i Dockerfile
           sed "s/__java_version__/{j}/g" -i Dockerfile
@@ -35,16 +35,18 @@ jobs:"""
         displayName: Adding the version
 
       - script: |
-          docker build -f Dockerfile -t quarkus-native-builder:f{f}-j{j} .
-
+          docker build -f Dockerfile -t mercur3/{tag_name} .
           echo "------------------------------------------------------\\n"
+        displayName: docker build -f Dockerfile -t mercur3/{tag_name} .
 
-          # echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
-          # docker push $MEDIUM_36
-          # docker push $FULL_36
-          # env:
-          #   DOCKER_PASSWORD: $(DOCKER_PASSWORD)
-        displayName: docker build -f Dockerfile -t quarkus-native-builder:f{f}-j{j} .
+      - script: |
+          echo "------------------------------------------------------\\n"
+          echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
+          docker push mercur3/{tag_name}
+        env:
+          DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+        displayName: docker push mercur3/{tag_name}
+
 """
     with open("azure-pipelines.yml", "w") as fd:
         output += "\n"
