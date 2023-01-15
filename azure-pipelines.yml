@@ -6,6 +6,13 @@
 
 trigger:
   - master
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - master
+pool:
+  vmImage: ubuntu-latest
 jobs:
   - job:
     displayName: Building on Fedora 36, Java 11
@@ -31,9 +38,10 @@ jobs:
           echo "------------------------------------------------------\n"
           echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
           docker push mercur3/quarkus-native-builder:f36-j11
+        displayName: docker push mercur3/quarkus-native-builder:f36-j11
+        condition: not(eq(variables['Build.Reason'], 'PullRequest'))
         env:
           DOCKER_PASSWORD: $(DOCKER_PASSWORD)
-        displayName: docker push mercur3/quarkus-native-builder:f36-j11
 
 
   - job:
@@ -60,9 +68,10 @@ jobs:
           echo "------------------------------------------------------\n"
           echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
           docker push mercur3/quarkus-native-builder:f36-j17
+        displayName: docker push mercur3/quarkus-native-builder:f36-j17
+        condition: not(eq(variables['Build.Reason'], 'PullRequest'))
         env:
           DOCKER_PASSWORD: $(DOCKER_PASSWORD)
-        displayName: docker push mercur3/quarkus-native-builder:f36-j17
 
 
   - job:
@@ -89,9 +98,10 @@ jobs:
           echo "------------------------------------------------------\n"
           echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
           docker push mercur3/quarkus-native-builder:f37-j11
+        displayName: docker push mercur3/quarkus-native-builder:f37-j11
+        condition: not(eq(variables['Build.Reason'], 'PullRequest'))
         env:
           DOCKER_PASSWORD: $(DOCKER_PASSWORD)
-        displayName: docker push mercur3/quarkus-native-builder:f37-j11
 
 
   - job:
@@ -118,8 +128,9 @@ jobs:
           echo "------------------------------------------------------\n"
           echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
           docker push mercur3/quarkus-native-builder:f37-j17
+        displayName: docker push mercur3/quarkus-native-builder:f37-j17
+        condition: not(eq(variables['Build.Reason'], 'PullRequest'))
         env:
           DOCKER_PASSWORD: $(DOCKER_PASSWORD)
-        displayName: docker push mercur3/quarkus-native-builder:f37-j17
 
 

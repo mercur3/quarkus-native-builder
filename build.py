@@ -14,6 +14,13 @@ def main() -> None:
 
 trigger:
   - master
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - master
+pool:
+  vmImage: ubuntu-latest
 jobs:"""
     for f in SUPPORTED_FEDORA_VERSIONS:
         for j in SUPPORTED_JAVA_VERSIONS:
@@ -43,9 +50,10 @@ jobs:"""
           echo "------------------------------------------------------\\n"
           echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
           docker push mercur3/{tag_name}
+        displayName: docker push mercur3/{tag_name}
+        condition: not(eq(variables['Build.Reason'], 'PullRequest'))
         env:
           DOCKER_PASSWORD: $(DOCKER_PASSWORD)
-        displayName: docker push mercur3/{tag_name}
 
 """
     with open("azure-pipelines.yml", "w") as fd:
