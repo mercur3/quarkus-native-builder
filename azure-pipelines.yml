@@ -30,6 +30,7 @@ jobs:
         displayName: Adding the version
 
       - script: |
+          set -e
           docker build -f Dockerfile -t mercur3/quarkus-native-builder:f36-j11 .
           echo "------------------------------------------------------\n"
         displayName: docker build -f Dockerfile -t mercur3/quarkus-native-builder:f36-j11 .
@@ -60,6 +61,7 @@ jobs:
         displayName: Adding the version
 
       - script: |
+          set -e
           docker build -f Dockerfile -t mercur3/quarkus-native-builder:f36-j17 .
           echo "------------------------------------------------------\n"
         displayName: docker build -f Dockerfile -t mercur3/quarkus-native-builder:f36-j17 .
@@ -90,6 +92,7 @@ jobs:
         displayName: Adding the version
 
       - script: |
+          set -e
           docker build -f Dockerfile -t mercur3/quarkus-native-builder:f37-j11 .
           echo "------------------------------------------------------\n"
         displayName: docker build -f Dockerfile -t mercur3/quarkus-native-builder:f37-j11 .
@@ -120,6 +123,7 @@ jobs:
         displayName: Adding the version
 
       - script: |
+          set -e
           docker build -f Dockerfile -t mercur3/quarkus-native-builder:f37-j17 .
           echo "------------------------------------------------------\n"
         displayName: docker build -f Dockerfile -t mercur3/quarkus-native-builder:f37-j17 .

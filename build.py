@@ -42,6 +42,7 @@ jobs:"""
         displayName: Adding the version
 
       - script: |
+          set -e
           docker build -f Dockerfile -t mercur3/{tag_name} .
           echo "------------------------------------------------------\\n"
         displayName: docker build -f Dockerfile -t mercur3/{tag_name} .
