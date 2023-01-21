@@ -2,7 +2,7 @@
 
 SUPPORTED_FEDORA_VERSIONS: list[int] = [36, 37]
 SUPPORTED_JAVA_VERSIONS: list[int] = [11, 17]
-MANDREL_VERSION: str = "22.3.0.1-Final"
+MANDREL_VERSION: str = "22.3.4.0-Final"
 
 
 def main() -> None:

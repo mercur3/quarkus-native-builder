@@ -24,7 +24,7 @@ jobs:
           printf "Using %d threads\n" $(nproc)
           echo "------------------------------------------------------\n"
           sed "s/__fedora_version__/36/g" -i Dockerfile
-          sed "s/__mandrel_version__/22.3.0.1-Final/g" -i Dockerfile
+          sed "s/__mandrel_version__/22.3.4.0-Final/g" -i Dockerfile
           sed "s/__java_version__/11/g" -i Dockerfile
           cat Dockerfile
         displayName: Adding the version
@@ -55,7 +55,7 @@ jobs:
           printf "Using %d threads\n" $(nproc)
           echo "------------------------------------------------------\n"
           sed "s/__fedora_version__/36/g" -i Dockerfile
-          sed "s/__mandrel_version__/22.3.0.1-Final/g" -i Dockerfile
+          sed "s/__mandrel_version__/22.3.4.0-Final/g" -i Dockerfile
           sed "s/__java_version__/17/g" -i Dockerfile
           cat Dockerfile
         displayName: Adding the version
@@ -86,7 +86,7 @@ jobs:
           printf "Using %d threads\n" $(nproc)
           echo "------------------------------------------------------\n"
           sed "s/__fedora_version__/37/g" -i Dockerfile
-          sed "s/__mandrel_version__/22.3.0.1-Final/g" -i Dockerfile
+          sed "s/__mandrel_version__/22.3.4.0-Final/g" -i Dockerfile
           sed "s/__java_version__/11/g" -i Dockerfile
           cat Dockerfile
         displayName: Adding the version
@@ -117,7 +117,7 @@ jobs:
           printf "Using %d threads\n" $(nproc)
           echo "------------------------------------------------------\n"
           sed "s/__fedora_version__/37/g" -i Dockerfile
-          sed "s/__mandrel_version__/22.3.0.1-Final/g" -i Dockerfile
+          sed "s/__mandrel_version__/22.3.4.0-Final/g" -i Dockerfile
           sed "s/__java_version__/17/g" -i Dockerfile
           cat Dockerfile
         displayName: Adding the version
