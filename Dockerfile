@@ -9,7 +9,8 @@ COPY dnf.conf /etc/dnf/
 
 # Installing the dependencies
 
-RUN dnf update --nodocs; \
+RUN set -eux; \
+    dnf update --nodocs; \
     dnf install --nodocs gcc glibc-devel zlib-devel libstdc++-static freetype-devel; \
 
 # install mandrel
