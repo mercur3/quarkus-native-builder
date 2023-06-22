@@ -10,8 +10,8 @@ Do *NOT* edit [[file:azure-pipelines.yml][azure-pipelines.yml]], it is autogener
 - 37
 
 *** JDK
-- 11
 - 17
+- 20
 
 *** Mandrel
 - Latest version
