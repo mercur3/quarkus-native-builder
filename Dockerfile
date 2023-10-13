@@ -11,22 +11,21 @@ COPY dnf.conf /etc/dnf/
 
 RUN set -eux; \
     dnf update --nodocs; \
-    dnf install --nodocs gcc glibc-devel zlib-devel libstdc++-static freetype-devel; \
+    dnf install --nodocs gcc glibc-devel zlib-devel libstdc++-static freetype-devel;
 
 # install mandrel
-    cd /opt; \
+RUN cd /opt; \
     curl \
         --output graalvm-quarkus.tar.gz \
         -L \
         https://github.com/graalvm/mandrel/releases/download/mandrel-__mandrel_version__/mandrel-java__java_version__-linux-amd64-__mandrel_version__.tar.gz; \
     tar -xvf graalvm-quarkus.tar.gz; \
     rm graalvm-quarkus.tar.gz; \
-
     export JAVA_HOME="$(pwd)/graalvm-quarkus"; \
     export GRAALVM_HOME="${JAVA_HOME}"; \
-    export PATH="${GRAALVM_HOME}/bin:$PATH"; \
+    export PATH="${GRAALVM_HOME}/bin:$PATH";
 
 # clean up
-    dnf clean all; \
+RUN dnf clean all; \
     rm -rf /var/log /tmp;
 
