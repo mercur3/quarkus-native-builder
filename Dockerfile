@@ -20,6 +20,7 @@ RUN cd /opt; \
         -L \
         https://github.com/graalvm/mandrel/releases/download/mandrel-__mandrel_version__/mandrel-java__java_version__-linux-amd64-__mandrel_version__.tar.gz; \
     tar --no-ignore-command-error -xvf graalvm-quarkus.tar.gz; \
+    if [ $? -ne 0 ]; then exit 1; fi; \
     rm graalvm-quarkus.tar.gz; \
     export JAVA_HOME="$(pwd)/graalvm-quarkus"; \
     export GRAALVM_HOME="${JAVA_HOME}"; \
