@@ -15,37 +15,6 @@ pool:
   vmImage: ubuntu-latest
 jobs:
   - job:
-    displayName: Building on Fedora 36, Java 21
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-      - script: |
-          echo "Building the images"
-          printf "Using %d threads\n" $(nproc)
-          echo "------------------------------------------------------\n"
-          sed "s/__fedora_version__/36/g" -i Dockerfile
-          sed "s/__mandrel_version__/23.1.0.0-Final/g" -i Dockerfile
-          sed "s/__java_version__/21/g" -i Dockerfile
-          cat Dockerfile
-        displayName: Adding the version
-
-      - script: |
-          set -e
-          docker build -f Dockerfile -t mercur3/quarkus-native-builder:f36-j21 .
-          echo "------------------------------------------------------\n"
-        displayName: docker build -f Dockerfile -t mercur3/quarkus-native-builder:f36-j21 .
-
-      - script: |
-          echo "------------------------------------------------------\n"
-          echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
-          docker push mercur3/quarkus-native-builder:f36-j21
-        displayName: docker push mercur3/quarkus-native-builder:f36-j21
-        condition: not(eq(variables['Build.Reason'], 'PullRequest'))
-        env:
-          DOCKER_PASSWORD: $(DOCKER_PASSWORD)
-
-
-  - job:
     displayName: Building on Fedora 37, Java 21
     pool:
       vmImage: ubuntu-latest
@@ -55,7 +24,7 @@ jobs:
           printf "Using %d threads\n" $(nproc)
           echo "------------------------------------------------------\n"
           sed "s/__fedora_version__/37/g" -i Dockerfile
-          sed "s/__mandrel_version__/23.1.0.0-Final/g" -i Dockerfile
+          sed "s/__mandrel_version__/23.1.1.0-Final/g" -i Dockerfile
           sed "s/__java_version__/21/g" -i Dockerfile
           cat Dockerfile
         displayName: Adding the version
@@ -86,7 +55,7 @@ jobs:
           printf "Using %d threads\n" $(nproc)
           echo "------------------------------------------------------\n"
           sed "s/__fedora_version__/38/g" -i Dockerfile
-          sed "s/__mandrel_version__/23.1.0.0-Final/g" -i Dockerfile
+          sed "s/__mandrel_version__/23.1.1.0-Final/g" -i Dockerfile
           sed "s/__java_version__/21/g" -i Dockerfile
           cat Dockerfile
         displayName: Adding the version
@@ -102,6 +71,37 @@ jobs:
           echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
           docker push mercur3/quarkus-native-builder:f38-j21
         displayName: docker push mercur3/quarkus-native-builder:f38-j21
+        condition: not(eq(variables['Build.Reason'], 'PullRequest'))
+        env:
+          DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+
+
+  - job:
+    displayName: Building on Fedora 39, Java 21
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+      - script: |
+          echo "Building the images"
+          printf "Using %d threads\n" $(nproc)
+          echo "------------------------------------------------------\n"
+          sed "s/__fedora_version__/39/g" -i Dockerfile
+          sed "s/__mandrel_version__/23.1.1.0-Final/g" -i Dockerfile
+          sed "s/__java_version__/21/g" -i Dockerfile
+          cat Dockerfile
+        displayName: Adding the version
+
+      - script: |
+          set -e
+          docker build -f Dockerfile -t mercur3/quarkus-native-builder:f39-j21 .
+          echo "------------------------------------------------------\n"
+        displayName: docker build -f Dockerfile -t mercur3/quarkus-native-builder:f39-j21 .
+
+      - script: |
+          echo "------------------------------------------------------\n"
+          echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
+          docker push mercur3/quarkus-native-builder:f39-j21
+        displayName: docker push mercur3/quarkus-native-builder:f39-j21
         condition: not(eq(variables['Build.Reason'], 'PullRequest'))
         env:
           DOCKER_PASSWORD: $(DOCKER_PASSWORD)
