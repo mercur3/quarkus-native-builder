@@ -21,40 +21,46 @@ pr:
       - master
 pool:
   vmImage: ubuntu-latest
-jobs:"""
+jobs:
+  - job: BuildQuarkusNative
+    displayName: Build & Push Quarkus Native Builder
+    pool:
+      vmImage: ubuntu-latest
+    strategy:
+      matrix:"""
     for f in SUPPORTED_FEDORA_VERSIONS:
         for j in SUPPORTED_JAVA_VERSIONS:
             tag_name = f"quarkus-native-builder:f{f}-j{j}"
             output += f"""
-  - job:
-    displayName: Building on Fedora {f}, Java {j}
-    pool:
-      vmImage: ubuntu-latest
+        f{f}-j{j}:
+          fedora_version: '{f}'
+          mandrel_version: '{MANDREL_VERSION}'
+          java_version: '{j}'
+          tag: 'f{f}-j{j}'
+"""
+    output += """
     steps:
       - script: |
-          echo "Building the images"
-          printf "Using %d threads\\n" $(nproc)
-          echo "------------------------------------------------------\\n"
-          sed "s/__fedora_version__/{f}/g" -i Dockerfile
-          sed "s/__mandrel_version__/{MANDREL_VERSION}/g" -i Dockerfile
-          sed "s/__java_version__/{j}/g" -i Dockerfile
+          echo "Building on Fedora $(fedora_version), Mandrel $(mandrel_version), Java $(java_version)"
+          printf "Using %d threads $(nproc)"
+          echo "------------------------------------------------------"
+          sed "s/__fedora_version__/$(fedora_version)/g"   -i Dockerfile
+          sed "s/__mandrel_version__/$(mandrel_version)/g" -i Dockerfile
+          sed "s/__java_version__/22/g"                    -i Dockerfile
           cat Dockerfile
-        displayName: Adding the version
+        displayName: Configure Dockerfile
 
-      - script: |
-          set -e
-          docker build -f Dockerfile -t mercur3/{tag_name} .
-          echo "------------------------------------------------------\\n"
-        displayName: docker build -f Dockerfile -t mercur3/{tag_name} .
-
-      - script: |
-          echo "------------------------------------------------------\\n"
-          echo "$DOCKER_PASSWORD" | docker login -u mercur3 --password-stdin
-          docker push mercur3/{tag_name}
-        displayName: docker push mercur3/{tag_name}
+      - task: Docker@2
+        displayName: Build & Push $(tag)
         condition: not(eq(variables['Build.Reason'], 'PullRequest'))
-        env:
-          DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+        inputs:
+          command: buildAndPush
+          containerRegistry: docker-hub-login
+          repository: mercur3/quarkus-native-builder
+          dockerfile: Dockerfile
+          tags: |
+            $(tag)
+            latest
 
 """
     with open("azure-pipelines.yml", "w") as fd:
