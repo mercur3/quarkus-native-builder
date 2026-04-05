@@ -38,7 +38,7 @@ jobs:
           java_version: '{j}'
           tag: 'f{f}-j{j}'
 """
-    output += """
+    output += f"""
     steps:
       - script: |
           echo "Building on Fedora $(fedora_version), Mandrel $(mandrel_version), Java $(java_version)"
@@ -46,7 +46,7 @@ jobs:
           echo "------------------------------------------------------"
           sed "s/__fedora_version__/$(fedora_version)/g"   -i Dockerfile
           sed "s/__mandrel_version__/$(mandrel_version)/g" -i Dockerfile
-          sed "s/__java_version__/22/g"                    -i Dockerfile
+          sed "s/__java_version__/25/g"                    -i Dockerfile
           cat Dockerfile
         displayName: Configure Dockerfile
 
