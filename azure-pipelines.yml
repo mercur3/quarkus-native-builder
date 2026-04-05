@@ -20,23 +20,11 @@ jobs:
       vmImage: ubuntu-latest
     strategy:
       matrix:
-        f38-j22:
-          fedora_version: '38'
-          mandrel_version: '24.0.1.0-Final'
-          java_version: '22'
-          tag: 'f38-j22'
-
-        f39-j22:
-          fedora_version: '39'
-          mandrel_version: '24.0.1.0-Final'
-          java_version: '22'
-          tag: 'f39-j22'
-
-        f40-j22:
-          fedora_version: '40'
-          mandrel_version: '24.0.1.0-Final'
-          java_version: '22'
-          tag: 'f40-j22'
+        f43-j25:
+          fedora_version: '43'
+          mandrel_version: '25.0.2.0-Final'
+          java_version: '25'
+          tag: 'f43-j25'
 
     steps:
       - script: |
