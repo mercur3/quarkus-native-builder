@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
-SUPPORTED_FEDORA_VERSIONS: list[int] = [43]
+SUPPORTED_FEDORA_VERSIONS: list[int] = [44]
 SUPPORTED_JAVA_VERSIONS: list[int] = [25]
-MANDREL_VERSION: str = "25.0.2.0-Final"
+MANDREL_VERSION: str = "25.0.3.0-Final"
 
 
 def main() -> None:

@@ -6,12 +6,10 @@ Do *NOT* edit [[file:azure-pipelines.yml][azure-pipelines.yml]], it is autogener
 
 ** Support
 *** Fedora
-- 36
-- 37
+- 44
 
 *** JDK
-- 17
-- 20
+- 25
 
 *** Mandrel
 - Latest version
