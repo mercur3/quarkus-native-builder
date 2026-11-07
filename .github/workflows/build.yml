@@ -37,7 +37,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Configure Dockerfile
         env:
@@ -54,7 +54,7 @@ jobs:
           cat Dockerfile
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       # Token based authentication: DOCKERHUB_TOKEN is a Docker Hub access token
       # (Account settings -> Personal access tokens), NOT the account password.
@@ -75,7 +75,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build & Push ${{ matrix.tag }}
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           # Explicit local context so the sed-patched Dockerfile is the one used
           context: .
